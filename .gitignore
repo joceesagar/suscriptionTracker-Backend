@@ -1,1 +1,5 @@
+#Ignoring node_modules to prevent it from pushing to github
 node_modules
+
+#Ignoring .env
+.env
