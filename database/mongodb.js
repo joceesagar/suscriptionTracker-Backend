@@ -1,17 +1,13 @@
 import mongoose from "mongoose";
-import { config } from "dotenv";
+import CONFIG from "../config/env.js";
 
-config(); //load env variables
-
-const db_uri = process.env.DB_URI;
-
-if (!db_uri) {
+if (!CONFIG.dbUri) {
     throw new Error("Database connection string not available")
 }
 
 const connectToDatabase = async () => {
     try {
-        await mongoose.connect(db_uri);
+        await mongoose.connect(CONFIG.dbUri);
         console.log("Database Connected Successfully")
     } catch (error) {
         console.error('Error connecting to database: ', error)

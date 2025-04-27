@@ -1,16 +1,11 @@
 import express from 'express';
-import { config } from 'dotenv';
 import userRouter from './routes/user.routes.js';
 import authRouter from './routes/auth.routes.js';
 import subscriptionRouter from './routes/subscription.routes.js';
 import connectToDatabase from './database/mongodb.js';
 import cookieParser from 'cookie-parser';
 import errorMiddleware from './middlewares/error.middleware.js';
-
-config(); //Load the variables from .env file
-
-const port = process.env.PORT || 3000;
-
+import CONFIG from './config/env.js';
 
 const app = express();
 
@@ -29,8 +24,8 @@ app.get('/', (req, res) => {
     res.send("Welcome to my server. I am from browser")
 })
 
-app.listen(port, async () => {
-    console.log(`Server is running on port http://localhost:${port}`);
+app.listen(CONFIG.port, async () => {
+    console.log(`Server is running on port http://localhost:${CONFIG.port}`);
     await connectToDatabase()
 })
 
